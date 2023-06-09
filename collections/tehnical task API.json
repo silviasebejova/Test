@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "85746fcd-1524-4b3e-873b-81f45cb9f09c",
+		"name": "tehnical task API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27880769-85746fcd-1524-4b3e-873b-81f45cb9f09c"
+	},
+	"item": [
+		{
+			"name": "https://reqres.in/api/users?page=2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e858ed42-302f-4052-942e-db8c62986ffd",
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"pm.test(\"Test total, user last names\", () => {   \r",
+							"  pm.expect(jsonData.total).to.eql(12);  \r",
+							"  const dataid7 = jsonData.data.find(m => m.email === \"michael.lawson@reqres.in\");\r",
+							"  pm.expect(dataid7.last_name).to.eql(\"Lawson\");\r",
+							"  const dataid8 = jsonData.data.find(m => m.email === \"lindsay.ferguson@reqres.in\");\r",
+							"  pm.expect(dataid8.last_name).to.eql(\"Ferguson\");\r",
+							"  const dataCount = jsonData.data.count()\r",
+							"  pm.expect(dataCount).to.be.eql(jsonData.total)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "db506da0-2f9f-4762-b8a3-36723f8a6531",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://reqres.in/api/users?name=morpheus&job=leader",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e30f3e3-bbd0-4249-910e-45eb4b6599f4",
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"pm.test(\"Id\", () => {   \r",
+							"  pm.expect(jsonData.id).to.have.lengthOf(3) \r",
+							"});\r",
+							"pm.test(\"Year\", () => {   \r",
+							"  pm.expect(jsonData.createdAt).to.include(2023);  \r",
+							"});\r",
+							"pm.test(\"201\", function () {\r",
+							"        pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 100ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b76fb648-b447-4fda-bebb-a7af7945178d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?name=morpheus&job=leader",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "morpheus"
+						},
+						{
+							"key": "job",
+							"value": "leader"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
